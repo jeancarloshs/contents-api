@@ -3,10 +3,10 @@ package app
 import (
 	"contents-api/internal/config"
 	"contents-api/internal/controllers"
-	"contents-api/internal/repository"
-	repo_vod "contents-api/internal/repository/vod_content"
-	"contents-api/internal/services"
-	service_vod "contents-api/internal/services/vod_content"
+	repo_img "contents-api/internal/repository/images_repositories"
+	repo_vod "contents-api/internal/repository/vod_content_repositories"
+	service_img "contents-api/internal/services/images_services"
+	service_vod "contents-api/internal/services/vod_content_services"
 )
 
 // DependencyContainer carrega todas as dependências
@@ -29,18 +29,18 @@ func InitializeDependencies() (*DependencyContainer, error) {
 
 	// Inicializa os repositórios
 	VodContentRepository := repo_vod.NewContentVodRepository(dataBase)
-	ImageRepository := repository.GetImageRepository(dataBase)
+	ImageRepository := repo_img.NewImageRepository(dataBase)
 
 	// Inicializa os serviços
 	VodContentService := service_vod.NewContentVodService(VodContentRepository)
-	ImageService := services.UploadImageService(ImageRepository, minioClient)
+	ImageService := service_img.UploadImageService(&ImageRepository, minioClient)
 
 	// Inicializa os controllers
 	VodContentController := controllers.NewVodContentController(VodContentService)
-	ImageController := controllers.ImagesController(*ImageService)
+	ImageController := controllers.NewImagesController(ImageService)
 
 	return &DependencyContainer{
 		VodContentController: *VodContentController,
-		ImageController:      ImageController,
+		ImageController:      *ImageController,
 	}, nil
 }

@@ -2,7 +2,7 @@ package controllers
 
 import (
 	model "contents-api/internal/models"
-	"contents-api/internal/services/vod_content"
+	vod_content "contents-api/internal/services/vod_content_services"
 	"net/http"
 	"strconv"
 

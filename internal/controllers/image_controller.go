@@ -1,17 +1,18 @@
 package controllers
 
 import (
+	"contents-api/internal/config"
+	"contents-api/internal/services/images_services"
+	services "contents-api/internal/services/minio_services"
 	"log"
 	"net/http"
-	"nx-api/internal/config"
-	"nx-api/internal/services"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 type ImageController struct {
-	imageService services.ImageService
+	imageService images_services.Service
 	minioService *services.MinIOUploadService
 }
 
@@ -48,7 +49,7 @@ func (gibic *ImageController) GetImageByIDController(ctx *gin.Context) {
 }
 
 // Modifique o construtor para inicializar o MinIOUploadService
-func ImagesController(service services.ImageService) ImageController {
+func NewImagesController(service images_services.Service) *ImageController {
 	// Obter cliente MinIO da configuração global
 	minioClient, err := config.ConnectMinio()
 	if err != nil {
@@ -58,7 +59,7 @@ func ImagesController(service services.ImageService) ImageController {
 	// Criar serviço de upload
 	minioService := services.NewMinIOUploadService(minioClient, "bucket-images")
 
-	return ImageController{
+	return &ImageController{
 		imageService: service,
 		minioService: minioService, // Agora está sendo inicializado
 	}

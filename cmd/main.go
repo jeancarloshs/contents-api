@@ -1,9 +1,9 @@
 package main
 
 import (
+	"contents-api/internal/app"
+	routes "contents-api/internal/routes"
 	"log"
-	"nx-api/internal/app"
-	routes "nx-api/internal/routes"
 
 	"github.com/gin-gonic/gin"
 )
