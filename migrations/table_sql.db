@@ -1,0 +1,69 @@
+CREATE DATABASE vod_db;
+USE vod_db;
+
+CREATE TABLE `tb_imagens` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`nome` VARCHAR(255) NULL DEFAULT NULL COLLATE,
+	`descricao` TEXT NULL DEFAULT NULL COLLATE,
+	`url` VARCHAR(255) NULL DEFAULT NULL COLLATE,
+	`tipo` ENUM('banner','poster','thumbnail') NULL DEFAULT NULL COLLATE,
+	`status` ENUM('ativo','inativo') NULL DEFAULT NULL COLLATE,
+	PRIMARY KEY (`id`) USING BTREE
+)
+;
+
+CREATE TABLE `tb_conteudo_distribuidora` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`nome` VARCHAR(255) NULL DEFAULT NULL COLLATE,
+	`descricao` TEXT NULL DEFAULT NULL COLLATE,
+	`status` ENUM('ativo','inativo') NULL DEFAULT NULL COLLATE,
+	`tipo_distribuidora` ENUM('premium','gratil') NULL DEFAULT NULL COLLATE,
+	PRIMARY KEY (`id`) USING BTREE
+)
+;
+
+CREATE TABLE `tb_categorias` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`nome` VARCHAR(255) NULL DEFAULT NULL COLLATE,
+	`descricao` TEXT NULL DEFAULT NULL COLLATE,
+	`status` ENUM('ativo','inativo') NULL DEFAULT NULL COLLATE,
+	`mostrar_menu` TINYINT(1) NOT NULL DEFAULT '0',
+	`tipo_conteudo` ENUM('filme','serie','canal') NULL DEFAULT NULL COLLATE,
+	`controle_parental` TINYINT(1) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`id`) USING BTREE
+)
+;
+
+
+CREATE TABLE `tb_conteudos_vod` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`titulo` VARCHAR(255) NOT NULL COLLATE,
+	`subtitulo` VARCHAR(255) NULL DEFAULT NULL COLLATE,
+	`descricao` TEXT NULL DEFAULT NULL COLLATE,
+	`imagem_id` INT NULL DEFAULT NULL,
+	`banner_id` INT NULL DEFAULT NULL,
+	`poster_id` INT NULL DEFAULT NULL,
+	`trailer` VARCHAR(255) NULL DEFAULT NULL COLLATE,
+	`url_video` VARCHAR(255) NULL DEFAULT NULL COLLATE,
+	`url_hls` VARCHAR(255) NULL DEFAULT NULL COLLATE,
+	`url_dash` VARCHAR(255) NULL DEFAULT NULL COLLATE,
+	`legenda` VARCHAR(255) NULL DEFAULT NULL COLLATE,
+	`categoria_id` INT NULL DEFAULT NULL,
+	`tempo_video` TIME NULL DEFAULT NULL,
+	`id_tmdb` VARCHAR(50) NULL DEFAULT NULL COLLATE,
+	`classificacao` ENUM('livre','10','12','14','16','18') NULL DEFAULT NULL COLLATE,
+	`distribuidora_id` INT NULL DEFAULT NULL,
+	`status` ENUM('ativo','inativo','sem_conteudo','conteudo_com_problema') NULL DEFAULT NULL COLLATE,
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `imagem_id` (`imagem_id`) USING BTREE,
+	INDEX `banner_id` (`banner_id`) USING BTREE,
+	INDEX `poster_id` (`poster_id`) USING BTREE,
+	INDEX `categoria_id` (`categoria_id`) USING BTREE,
+	INDEX `distribuidora_id` (`distribuidora_id`) USING BTREE,
+	CONSTRAINT `tb_conteudos_vod_ibfk_1` FOREIGN KEY (`imagem_id`) REFERENCES `tb_imagens` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
+	CONSTRAINT `tb_conteudos_vod_ibfk_2` FOREIGN KEY (`banner_id`) REFERENCES `tb_imagens` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
+	CONSTRAINT `tb_conteudos_vod_ibfk_3` FOREIGN KEY (`poster_id`) REFERENCES `tb_imagens` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
+	CONSTRAINT `tb_conteudos_vod_ibfk_4` FOREIGN KEY (`categoria_id`) REFERENCES `tb_categorias` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL,
+	CONSTRAINT `tb_conteudos_vod_ibfk_5` FOREIGN KEY (`distribuidora_id`) REFERENCES `tb_conteudo_distribuidora` (`id`) ON UPDATE NO ACTION ON DELETE SET NULL
+)
+;
