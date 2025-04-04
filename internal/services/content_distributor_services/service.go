@@ -6,6 +6,7 @@ import (
 )
 
 type Service interface {
+	GetAllContentDistributorService() ([]model.ContentDistributor, error)
 	CreateContentDistributorService(distributorContent model.ContentDistributor) (model.ContentDistributor, error)
 }
 

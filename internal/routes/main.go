@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func AppRoutes(router *gin.Engine, vodController controllers.VodContentController, imgController controllers.ImageController) {
+func AppRoutes(router *gin.Engine, vodController controllers.VodContentController, imgController controllers.ImageController, distributorController controllers.ContentDistributorController) {
 	api := router.Group("/api")
 	{
 		api.GET("/", func(ctx *gin.Context) {
@@ -22,5 +22,7 @@ func AppRoutes(router *gin.Engine, vodController controllers.VodContentControlle
 		api.GET("/images", imgController.GetAllImagesController)
 		api.GET("/image/:id", imgController.GetImageByIDController)
 		api.POST("/upload", imgController.InsertImage)
+
+		api.GET("/distributors", distributorController.GetAllContentDistributorController)
 	}
 }
