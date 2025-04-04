@@ -1,7 +1,9 @@
 package controllers
 
 import (
+	model "contents-api/internal/models"
 	"contents-api/internal/services/content_distributor_services"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -32,4 +34,22 @@ func (gacdc *ContentDistributorController) GetAllContentDistributorController(ct
 	}
 
 	ctx.JSON(http.StatusOK, getAll)
+}
+
+func (ccdc *ContentDistributorController) CreateContentDistributorController(ctx *gin.Context) {
+	var distributorContent model.ContentDistributor
+	fmt.Println(distributorContent)
+	err := ctx.BindJSON(&distributorContent)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Formato de dados inválido"})
+		return
+	}
+
+	distributorInsert, err := ccdc.services.CreateContentDistributorService(distributorContent)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, err)
+		return
+	}
+
+	ctx.JSON(http.StatusCreated, distributorInsert)
 }

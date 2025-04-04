@@ -16,7 +16,7 @@ func AppRoutes(router *gin.Engine, vodController controllers.VodContentControlle
 		// Rotas de conteúdos
 		api.GET("/contents", vodController.GetAllVodContents)
 		api.GET("/content/:id", vodController.GetVodContentByID)
-		api.POST("/content/insert", vodController.InsertVodContent)
+		api.POST("/content", vodController.InsertVodContent)
 
 		// Rotas de imagens
 		api.GET("/images", imgController.GetAllImagesController)
@@ -24,5 +24,6 @@ func AppRoutes(router *gin.Engine, vodController controllers.VodContentControlle
 		api.POST("/upload", imgController.InsertImage)
 
 		api.GET("/distributors", distributorController.GetAllContentDistributorController)
+		api.POST("/distributor", distributorController.CreateContentDistributorController)
 	}
 }
