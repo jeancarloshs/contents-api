@@ -9,6 +9,7 @@ func (gibir *ImageRepository) GetImageByIDRepository(imgID int) ([]model.Images,
 	if err != nil {
 		return []model.Images{}, err
 	}
+	defer row.Close()
 
 	var imageList []model.Images
 	var imageObj model.Images

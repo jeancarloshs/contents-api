@@ -24,6 +24,7 @@ func AppRoutes(router *gin.Engine, vodController controllers.VodContentControlle
 		api.POST("/upload", imgController.InsertImage)
 
 		api.GET("/distributors", distributorController.GetAllContentDistributorController)
+		api.GET("/distributor/:id", distributorController.GetContentDistributorController)
 		api.POST("/distributor", distributorController.CreateContentDistributorController)
 	}
 }

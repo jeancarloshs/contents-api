@@ -5,6 +5,7 @@ import (
 	"contents-api/internal/services/content_distributor_services"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -34,6 +35,21 @@ func (gacdc *ContentDistributorController) GetAllContentDistributorController(ct
 	}
 
 	ctx.JSON(http.StatusOK, getAll)
+}
+
+func (gcbic *ContentDistributorController) GetContentDistributorController(ctx *gin.Context) {
+	cdID, err := strconv.Atoi(ctx.Param("id"))
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido"})
+		return
+	}
+
+	allDistributor, err := gcbic.services.GetByIDContentDistributorService(cdID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, err)
+	}
+
+	ctx.JSON(http.StatusOK, allDistributor)
 }
 
 func (ccdc *ContentDistributorController) CreateContentDistributorController(ctx *gin.Context) {
