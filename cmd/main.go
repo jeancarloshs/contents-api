@@ -17,7 +17,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Erro ao inicializar dependências: %v", err)
 	}
-	routes.AppRoutes(server, dependencies.VodContentController, dependencies.ImageController, dependencies.ContentDistributorController)
+	routes.AppRoutes(server, dependencies.VodContentController, dependencies.ImageController, dependencies.ContentDistributorController, dependencies.CategoryController)
 
 	log.Printf("Servidor rodando na http://%s%s\n", ip, port)
 
