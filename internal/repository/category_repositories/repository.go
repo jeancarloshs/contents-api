@@ -17,4 +17,5 @@ func NewCategoryRepository(connection *sql.DB) CategoryRepository {
 
 type Repository interface {
 	GetAllCategoryRepository() ([]model.Category, error)
+	GetCategoryByIDRepository(catID int) ([]model.Category, error)
 }

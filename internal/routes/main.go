@@ -28,5 +28,6 @@ func AppRoutes(router *gin.Engine, vodController controllers.VodContentControlle
 		api.POST("/distributor", distributorController.CreateContentDistributorController)
 
 		api.GET("/categories", categoryController.GetAllCategoryController)
+		api.GET("/category/:id", categoryController.GetCategoryByIDController)
 	}
 }
