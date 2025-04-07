@@ -7,7 +7,7 @@ import (
 
 type Service interface {
 	GetAllVodContentService() ([]model.VodContent, error)
-	GetVodContentByIDService(vodID int) ([]model.VodContent, error)
+	GetVodContentByIDService(vodID int) (model.VodContent, error)
 	CreateVodContentService(vodContent model.VodContent) (model.VodContent, error)
 }
 

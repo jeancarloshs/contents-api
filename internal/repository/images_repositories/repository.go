@@ -17,6 +17,6 @@ func NewImageRepository(connection *sql.DB) ImageRepository {
 
 type Repository interface {
 	GetAllImageRepository() ([]model.Images, error)
-	GetImageByIDRepository(imgID int) ([]model.Images, error)
+	GetImageByIDRepository(imgID int) (model.Images, error)
 	CreateImageRepository(imgContent model.Images) (model.Images, error)
 }

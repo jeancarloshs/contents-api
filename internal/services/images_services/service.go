@@ -9,7 +9,7 @@ import (
 
 type Service interface {
 	GetAllImagesService() ([]model.Images, error)
-	GetImageByIDService(imgID int) ([]model.Images, error)
+	GetImageByIDService(imgID int) (model.Images, error)
 	CreateImageService(imgContent model.Images) (model.Images, error)
 }
 

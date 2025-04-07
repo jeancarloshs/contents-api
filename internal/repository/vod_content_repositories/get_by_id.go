@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func (cvr *VodContentRepository) GetVodContentByIDRepository(vodID int) ([]model.VodContent, error) {
+func (cvr *VodContentRepository) GetVodContentByIDRepository(vodID int) (model.VodContent, error) {
 	query := `
 	SELECT
 		vod.id, vod.titulo, vod.subtitulo, vod.descricao, img_imagem.url AS imagem, img_banner.url AS banner, img_poster.url AS poster, vod.trailer, vod.url_video, vod.url_hls, vod.url_dash, vod.legenda, cat.nome AS categoria, vod.tempo_video, vod.id_tmdb, vod.classificacao, dist.nome AS distribuidora, vod.status
@@ -21,43 +21,39 @@ func (cvr *VodContentRepository) GetVodContentByIDRepository(vodID int) ([]model
 
 	if err != nil {
 		fmt.Println(err)
-		return []model.VodContent{}, err
+		return model.VodContent{}, err
 	}
 
-	var contentList []model.VodContent
+	// var contentList []model.VodContent
 	var contentObj model.VodContent
 
-	for rows.Next() {
-		err = rows.Scan(
-			&contentObj.ID,
-			&contentObj.Title,
-			&contentObj.Subtitle,
-			&contentObj.Description,
-			&contentObj.Image,
-			&contentObj.Banner,
-			&contentObj.Poster,
-			&contentObj.Trailer,
-			&contentObj.UrlVideo,
-			&contentObj.UrlHls,
-			&contentObj.UrlDash,
-			&contentObj.Caption,
-			&contentObj.Category,
-			&contentObj.VideoTime,
-			&contentObj.IdTmdb,
-			&contentObj.Classification,
-			&contentObj.Distribution,
-			&contentObj.Status,
-		)
+	err = rows.Scan(
+		&contentObj.ID,
+		&contentObj.Title,
+		&contentObj.Subtitle,
+		&contentObj.Description,
+		&contentObj.Image,
+		&contentObj.Banner,
+		&contentObj.Poster,
+		&contentObj.Trailer,
+		&contentObj.UrlVideo,
+		&contentObj.UrlHls,
+		&contentObj.UrlDash,
+		&contentObj.Caption,
+		&contentObj.Category,
+		&contentObj.VideoTime,
+		&contentObj.IdTmdb,
+		&contentObj.Classification,
+		&contentObj.Distribution,
+		&contentObj.Status,
+	)
 
-		if err != nil {
-			fmt.Println(err)
-			return []model.VodContent{}, err
-		}
-
-		contentList = append(contentList, contentObj)
+	if err != nil {
+		fmt.Println(err)
+		return model.VodContent{}, err
 	}
 
 	rows.Close()
 
-	return contentList, nil
+	return contentObj, nil
 }
