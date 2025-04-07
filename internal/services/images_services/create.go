@@ -5,8 +5,8 @@ import (
 	"fmt"
 )
 
-func (uis *ImageService) CreateImageService(imageContent model.Images) (model.Images, error) {
-	imgInsert, err := uis.repository.CreateImageRepository(imageContent)
+func (cis *ImageService) Create(imageContent model.Images) (model.Images, error) {
+	imgInsert, err := cis.repository.CreateImageRepository(imageContent)
 	if err != nil {
 		fmt.Println(err)
 		return model.Images{}, nil

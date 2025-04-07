@@ -2,10 +2,10 @@ package category_repository
 
 import model "contents-api/internal/models"
 
-func (gacr *CategoryRepository) GetAllCategoryRepository() ([]model.Category, error) {
+func (fal *CategoryRepository) FindAll() ([]model.Category, error) {
 	query := `SELECT * FROM tb_categorias`
 
-	rows, err := gacr.connection.Query(query)
+	rows, err := fal.connection.Query(query)
 	if err != nil {
 		return []model.Category{}, err
 	}

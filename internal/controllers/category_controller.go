@@ -19,7 +19,7 @@ func NewCategoryController(service category_services.Service) *CategoryControlle
 }
 
 func (gacc *CategoryController) GetAllCategoryController(ctx *gin.Context) {
-	categories, err := gacc.service.GetAllCategoryService()
+	categories, err := gacc.service.FindAll()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 		return
@@ -42,7 +42,7 @@ func (gcbic *CategoryController) GetCategoryByIDController(ctx *gin.Context) {
 		return
 	}
 
-	categoryID, err := gcbic.service.GetCategoryByIDService(catID)
+	categoryID, err := gcbic.service.FindOne(catID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 		return

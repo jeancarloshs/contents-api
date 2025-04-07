@@ -6,8 +6,8 @@ import (
 )
 
 type Service interface {
-	GetAllCategoryService() ([]model.Category, error)
-	GetCategoryByIDService(catID int) ([]model.Category, error)
+	FindAll() ([]model.Category, error)
+	FindOne(catID int) (model.Category, error)
 }
 
 type CategoryServices struct {

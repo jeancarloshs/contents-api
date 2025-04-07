@@ -1,34 +1,36 @@
 package category_repository
 
-import model "contents-api/internal/models"
+import (
+	model "contents-api/internal/models"
+	"fmt"
+)
 
-func (gcbir *CategoryRepository) GetCategoryByIDRepository(catID int) ([]model.Category, error) {
+func (fior *CategoryRepository) FindOne(catID int) (model.Category, error) {
 	query := `SELECT * FROM tb_categorias WHERE ID = ?`
 
-	row, err := gcbir.connection.Query(query, catID)
+	row, err := fior.connection.Query(query, catID)
 	if err != nil {
-		return []model.Category{}, err
+		fmt.Println(err)
+		return model.Category{}, err
 	}
 
-	var catList []model.Category
 	var catObj model.Category
 
-	for row.Next() {
-		err = row.Scan(
-			&catObj.ID,
-			&catObj.CategoryName,
-			&catObj.Description,
-			&catObj.Status,
-			&catObj.ShowMenu,
-			&catObj.ContentType,
-			&catObj.ParentalControl,
-		)
-		if err != nil {
-			return []model.Category{}, err
-		}
-
-		catList = append(catList, catObj)
+	err = row.Scan(
+		&catObj.ID,
+		&catObj.CategoryName,
+		&catObj.Description,
+		&catObj.Status,
+		&catObj.ShowMenu,
+		&catObj.ContentType,
+		&catObj.ParentalControl,
+	)
+	if err != nil {
+		fmt.Println(err)
+		return model.Category{}, err
 	}
 
-	return catList, nil
+	row.Close()
+
+	return catObj, nil
 }
