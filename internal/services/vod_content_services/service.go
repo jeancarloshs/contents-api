@@ -6,9 +6,9 @@ import (
 )
 
 type Service interface {
-	GetAllVodContentService() ([]model.VodContent, error)
-	GetVodContentByIDService(vodID int) (model.VodContent, error)
-	CreateVodContentService(vodContent model.VodContent) (model.VodContent, error)
+	FindAll() ([]model.VodContent, error)
+	FindByID(vodID int) (model.VodContent, error)
+	Create(vodContent model.VodContent) (model.VodContent, error)
 }
 
 type VodContentService struct {

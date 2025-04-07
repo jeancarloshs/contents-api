@@ -16,7 +16,7 @@ func NewContentVodRepository(connection *sql.DB) *VodContentRepository {
 }
 
 type Repository interface {
-	GetAllVodContentRepository() ([]model.VodContent, error)
-	GetVodContentByIDRepository(vodID int) (model.VodContent, error)
-	CreateVodContentRepository(vodContent model.VodContent) (model.VodContent, error)
+	FindAll() ([]model.VodContent, error)
+	FindByID(vodID int) (model.VodContent, error)
+	Create(vodContent model.VodContent) (model.VodContent, error)
 }

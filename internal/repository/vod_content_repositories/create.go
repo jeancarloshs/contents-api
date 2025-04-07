@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func (cvcr *VodContentRepository) CreateVodContentRepository(vodContent model.VodContent) (model.VodContent, error) {
+func (cvcr *VodContentRepository) Create(vodContent model.VodContent) (model.VodContent, error) {
 	imgID := 1
 	bannerID := 1
 	posterID := 1

@@ -19,23 +19,8 @@ func NewVodContentController(service vod_content.Service) *VodContentController 
 	}
 }
 
-func (gacvd *VodContentController) GetVodContentByID(ctx *gin.Context) {
-	vodID, err := strconv.Atoi(ctx.Param("id"))
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido"})
-		return
-	}
-
-	allContents, err := gacvd.contentVodService.GetVodContentByIDService(vodID)
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, err)
-	}
-
-	ctx.JSON(http.StatusOK, allContents)
-}
-
-func (gacvd *VodContentController) GetAllVodContents(ctx *gin.Context) {
-	allContents, err := gacvd.contentVodService.GetAllVodContentService()
+func (gacvd *VodContentController) FindAll(ctx *gin.Context) {
+	allContents, err := gacvd.contentVodService.FindAll()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 		return
@@ -51,7 +36,22 @@ func (gacvd *VodContentController) GetAllVodContents(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, allContents)
 }
 
-func (ivc *VodContentController) InsertVodContent(ctx *gin.Context) {
+func (gacvd *VodContentController) FindByID(ctx *gin.Context) {
+	vodID, err := strconv.Atoi(ctx.Param("id"))
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido"})
+		return
+	}
+
+	allContents, err := gacvd.contentVodService.FindByID(vodID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, err)
+	}
+
+	ctx.JSON(http.StatusOK, allContents)
+}
+
+func (ivc *VodContentController) Create(ctx *gin.Context) {
 	var vodContent model.VodContent
 	err := ctx.BindJSON(&vodContent)
 
@@ -60,7 +60,7 @@ func (ivc *VodContentController) InsertVodContent(ctx *gin.Context) {
 		return
 	}
 
-	contentInsert, err := ivc.contentVodService.CreateVodContentService(vodContent)
+	contentInsert, err := ivc.contentVodService.Create(vodContent)
 
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)

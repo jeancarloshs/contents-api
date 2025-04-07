@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func (cvr *VodContentRepository) GetVodContentByIDRepository(vodID int) (model.VodContent, error) {
+func (fbidr *VodContentRepository) FindByID(vodID int) (model.VodContent, error) {
 	query := `
 	SELECT
 		vod.id, vod.titulo, vod.subtitulo, vod.descricao, img_imagem.url AS imagem, img_banner.url AS banner, img_poster.url AS poster, vod.trailer, vod.url_video, vod.url_hls, vod.url_dash, vod.legenda, cat.nome AS categoria, vod.tempo_video, vod.id_tmdb, vod.classificacao, dist.nome AS distribuidora, vod.status
@@ -17,7 +17,7 @@ func (cvr *VodContentRepository) GetVodContentByIDRepository(vodID int) (model.V
 	LEFT JOIN tb_conteudo_distribuidora dist ON vod.distribuidora_id = dist.id
 	WHERE vod.id = ?;
 	`
-	rows, err := cvr.connection.Query(query, vodID)
+	rows, err := fbidr.connection.Query(query, vodID)
 
 	if err != nil {
 		fmt.Println(err)

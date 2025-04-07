@@ -14,9 +14,9 @@ func AppRoutes(router *gin.Engine, vodController controllers.VodContentControlle
 		})
 
 		// Rotas de conteúdos
-		api.GET("/contents", vodController.GetAllVodContents)
-		api.GET("/content/:id", vodController.GetVodContentByID)
-		api.POST("/content", vodController.InsertVodContent)
+		api.GET("/contents", vodController.FindAll)
+		api.GET("/content/:id", vodController.FindByID)
+		api.POST("/content", vodController.Create)
 
 		// Rotas de imagens
 		api.GET("/images", imgController.FindAll)

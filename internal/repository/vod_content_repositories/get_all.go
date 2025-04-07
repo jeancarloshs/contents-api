@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func (cvr *VodContentRepository) GetAllVodContentRepository() ([]model.VodContent, error) {
+func (favr *VodContentRepository) FindAll() ([]model.VodContent, error) {
 	query := `
 	SELECT
 		vod.id, vod.titulo, vod.subtitulo, vod.descricao, img_imagem.url AS imagem, img_banner.url AS banner, img_poster.url AS poster, vod.trailer, vod.url_video, vod.url_hls, vod.url_dash, vod.legenda, cat.nome AS categoria, vod.tempo_video, vod.id_tmdb, vod.classificacao, dist.nome AS distribuidora, vod.status
@@ -16,7 +16,7 @@ func (cvr *VodContentRepository) GetAllVodContentRepository() ([]model.VodConten
 	LEFT JOIN tb_categorias cat ON vod.categoria_id = cat.id
 	LEFT JOIN tb_conteudo_distribuidora dist ON vod.distribuidora_id = dist.id;
 	`
-	rows, err := cvr.connection.Query(query)
+	rows, err := favr.connection.Query(query)
 
 	if err != nil {
 		fmt.Println(err)
