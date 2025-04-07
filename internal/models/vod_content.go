@@ -8,6 +8,7 @@ type VodContent struct {
 	Image          *string `json:"imagem"`
 	Banner         *string `json:"banner"`
 	Poster         *string `json:"poster"`
+	Thumbnail      *string `json:"thumbnail"`
 	Trailer        *string `json:"trailer"`
 	UrlVideo       *string `json:"url_video"`
 	UrlHls         *string `json:"url_hls"`
