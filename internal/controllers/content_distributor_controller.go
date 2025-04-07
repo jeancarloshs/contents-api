@@ -20,8 +20,8 @@ func NewContentDistributorController(service content_distributor_services.Servic
 	}
 }
 
-func (gacdc *ContentDistributorController) GetAllContentDistributorController(ctx *gin.Context) {
-	getAll, err := gacdc.services.GetAllContentDistributorService()
+func (gacdc *ContentDistributorController) FindAll(ctx *gin.Context) {
+	getAll, err := gacdc.services.FindAll()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 		return
@@ -37,14 +37,14 @@ func (gacdc *ContentDistributorController) GetAllContentDistributorController(ct
 	ctx.JSON(http.StatusOK, getAll)
 }
 
-func (gcbic *ContentDistributorController) GetContentDistributorController(ctx *gin.Context) {
+func (gcbic *ContentDistributorController) FindByID(ctx *gin.Context) {
 	cdID, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido"})
 		return
 	}
 
-	allDistributor, err := gcbic.services.GetByIDContentDistributorService(cdID)
+	allDistributor, err := gcbic.services.FindByID(cdID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 	}
@@ -52,7 +52,7 @@ func (gcbic *ContentDistributorController) GetContentDistributorController(ctx *
 	ctx.JSON(http.StatusOK, allDistributor)
 }
 
-func (ccdc *ContentDistributorController) CreateContentDistributorController(ctx *gin.Context) {
+func (ccdc *ContentDistributorController) Create(ctx *gin.Context) {
 	var distributorContent model.ContentDistributor
 	fmt.Println(distributorContent)
 	err := ctx.BindJSON(&distributorContent)
@@ -61,7 +61,7 @@ func (ccdc *ContentDistributorController) CreateContentDistributorController(ctx
 		return
 	}
 
-	distributorInsert, err := ccdc.services.CreateContentDistributorService(distributorContent)
+	distributorInsert, err := ccdc.services.Create(distributorContent)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 		return

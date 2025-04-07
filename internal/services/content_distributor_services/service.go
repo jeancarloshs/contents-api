@@ -6,9 +6,9 @@ import (
 )
 
 type Service interface {
-	GetAllContentDistributorService() ([]model.ContentDistributor, error)
-	GetByIDContentDistributorService(cdID int) ([]model.ContentDistributor, error)
-	CreateContentDistributorService(distributorContent model.ContentDistributor) (model.ContentDistributor, error)
+	FindAll() ([]model.ContentDistributor, error)
+	FindByID(cdID int) ([]model.ContentDistributor, error)
+	Create(distributorContent model.ContentDistributor) (model.ContentDistributor, error)
 }
 
 type ContentDistributorService struct {

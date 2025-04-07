@@ -16,8 +16,8 @@ type ImageController struct {
 	minioService *services.MinIOUploadService
 }
 
-func (gaic *ImageController) GetAllImagesController(ctx *gin.Context) {
-	allImages, err := gaic.imageService.GetAllImagesService()
+func (gaic *ImageController) FindAll(ctx *gin.Context) {
+	allImages, err := gaic.imageService.FindAll()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 		return
@@ -33,14 +33,14 @@ func (gaic *ImageController) GetAllImagesController(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, allImages)
 }
 
-func (gibic *ImageController) GetImageByIDController(ctx *gin.Context) {
+func (gibic *ImageController) FindByID(ctx *gin.Context) {
 	imgID, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "ID inválido"})
 		return
 	}
 
-	getImg, err := gibic.imageService.GetImageByIDService(imgID)
+	getImg, err := gibic.imageService.FindByID(imgID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 	}

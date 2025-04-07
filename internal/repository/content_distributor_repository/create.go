@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func (ccdr *ContentDistributorRepository) CreateContentDistributorRepository(distributorContent model.ContentDistributor) (model.ContentDistributor, error) {
+func (ccdr *ContentDistributorRepository) Create(distributorContent model.ContentDistributor) (model.ContentDistributor, error) {
 	insertDistributor, err := ccdr.connection.Prepare(`
 		INSERT INTO tb_conteudo_distribuidora (nome, descricao, status, tipo_distribuidora) VALUES (?, ?, ?, ?)
 	`)

@@ -7,7 +7,7 @@ import (
 
 type Service interface {
 	FindAll() ([]model.Category, error)
-	FindOne(catID int) (model.Category, error)
+	FindByID(catID int) (model.Category, error)
 }
 
 type CategoryServices struct {

@@ -2,10 +2,10 @@ package content_distributor_repository
 
 import model "contents-api/internal/models"
 
-func (gbicdr *ContentDistributorRepository) GetByIDContentDistributorRepository(cdID int) ([]model.ContentDistributor, error) {
+func (focdr *ContentDistributorRepository) FindByID(cdID int) ([]model.ContentDistributor, error) {
 	query := `SELECT * FROM tb_conteudo_distribuidora WHERE ID = ?`
 
-	row, err := gbicdr.connection.Query(query, cdID)
+	row, err := focdr.connection.Query(query, cdID)
 	if err != nil {
 		return []model.ContentDistributor{}, err
 	}

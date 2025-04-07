@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func (fior *CategoryRepository) FindOne(catID int) (model.Category, error) {
+func (fior *CategoryRepository) FindByID(catID int) (model.Category, error) {
 	query := `SELECT * FROM tb_categorias WHERE ID = ?`
 
 	row, err := fior.connection.Query(query, catID)

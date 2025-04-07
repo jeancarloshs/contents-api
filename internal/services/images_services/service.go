@@ -8,8 +8,8 @@ import (
 )
 
 type Service interface {
-	GetAllImagesService() ([]model.Images, error)
-	GetImageByIDService(imgID int) (model.Images, error)
+	FindAll() ([]model.Images, error)
+	FindByID(imgID int) (model.Images, error)
 	Create(imgContent model.Images) (model.Images, error)
 }
 

@@ -6,10 +6,10 @@ import (
 	"fmt"
 )
 
-func (gibir *ImageRepository) GetImageByIDRepository(imgID int) (model.Images, error) {
+func (fibir *ImageRepository) FindByID(imgID int) (model.Images, error) {
 	query := `SELECT * FROM tb_imagens WHERE id = ?`
 
-	row := gibir.connection.QueryRow(query, imgID)
+	row := fibir.connection.QueryRow(query, imgID)
 
 	var imageObj model.Images
 	err := row.Scan(

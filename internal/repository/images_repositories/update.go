@@ -2,7 +2,7 @@ package images_repositories
 
 import model "contents-api/internal/models"
 
-func (uir *ImageRepository) UpdateImageRepository(imgContent model.Images) (model.Images, error) {
+func (uir *ImageRepository) Update(imgContent model.Images) (model.Images, error) {
 	updateIMG, err := uir.connection.Prepare(`
 		UPDATE tb_imagens SET  nome=?, descricao=?, url=?, tipo=?, status=? WHERE id=?
 	`)

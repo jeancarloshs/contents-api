@@ -6,7 +6,7 @@ import (
 )
 
 func (cis *ImageService) Create(imageContent model.Images) (model.Images, error) {
-	imgInsert, err := cis.repository.CreateImageRepository(imageContent)
+	imgInsert, err := cis.repository.Create(imageContent)
 	if err != nil {
 		fmt.Println(err)
 		return model.Images{}, nil

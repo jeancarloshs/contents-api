@@ -2,9 +2,9 @@ package images_repositories
 
 import model "contents-api/internal/models"
 
-func (gair *ImageRepository) GetAllImageRepository() ([]model.Images, error) {
+func (fair *ImageRepository) FindAll() ([]model.Images, error) {
 	query := `SELECT * FROM tb_imagens`
-	rows, err := gair.connection.Query(query)
+	rows, err := fair.connection.Query(query)
 	if err != nil {
 		return []model.Images{}, err
 	}

@@ -17,5 +17,5 @@ func NewCategoryRepository(connection *sql.DB) CategoryRepository {
 
 type Repository interface {
 	FindAll() ([]model.Category, error)
-	FindOne(catID int) (model.Category, error)
+	FindByID(catID int) (model.Category, error)
 }

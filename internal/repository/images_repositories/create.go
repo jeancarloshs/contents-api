@@ -5,9 +5,9 @@ import (
 	"fmt"
 )
 
-func (uir *ImageRepository) CreateImageRepository(imageContent model.Images) (model.Images, error) {
+func (cir *ImageRepository) Create(imageContent model.Images) (model.Images, error) {
 
-	insertIMG, err := uir.connection.Prepare(`
+	insertIMG, err := cir.connection.Prepare(`
 		INSERT INTO tb_imagens (nome, descricao, url, tipo, status) VALUES (?, ?, ?, ?, ?)
 	`)
 

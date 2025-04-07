@@ -16,7 +16,7 @@ func NewContentDistributorRepository(connection *sql.DB) ContentDistributorRepos
 }
 
 type Repository interface {
-	GetAllContentDistributorRepository() ([]model.ContentDistributor, error)
-	GetByIDContentDistributorRepository(cdID int) ([]model.ContentDistributor, error)
-	CreateContentDistributorRepository(contentDistributor model.ContentDistributor) (model.ContentDistributor, error)
+	FindAll() ([]model.ContentDistributor, error)
+	FindByID(cdID int) ([]model.ContentDistributor, error)
+	Create(contentDistributor model.ContentDistributor) (model.ContentDistributor, error)
 }

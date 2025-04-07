@@ -2,10 +2,10 @@ package content_distributor_repository
 
 import model "contents-api/internal/models"
 
-func (gacdr *ContentDistributorRepository) GetAllContentDistributorRepository() ([]model.ContentDistributor, error) {
+func (facdr *ContentDistributorRepository) FindAll() ([]model.ContentDistributor, error) {
 	query := `SELECT * FROM tb_conteudo_distribuidora`
 
-	rows, err := gacdr.connection.Query(query)
+	rows, err := facdr.connection.Query(query)
 	if err != nil {
 		return []model.ContentDistributor{}, err
 	}
