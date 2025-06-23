@@ -6,5 +6,5 @@ type Images struct {
 	Description *string `json:"descricao"`
 	Url         *string `json:"url"`
 	Type        *string `json:"tipo"`
-	Status      *Status `json:"status"`
+	Status      *string `json:"status"`
 }
