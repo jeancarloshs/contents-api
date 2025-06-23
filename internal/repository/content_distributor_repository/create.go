@@ -2,7 +2,6 @@ package content_distributor_repository
 
 import (
 	model "contents-api/internal/models"
-	"strings"
 )
 
 func (ccdr *ContentDistributorRepository) Create(distributorContent model.ContentDistributor) (model.ContentDistributor, error) {
@@ -14,16 +13,21 @@ func (ccdr *ContentDistributorRepository) Create(distributorContent model.Conten
 	}
 	defer insertDistributor.Close()
 
-	_, err = insertDistributor.Exec(
+	result, err := insertDistributor.Exec(
 		distributorContent.Name,
 		distributorContent.Description,
 		distributorContent.Status,
-		distributorContent.DistributorType == strings.TrimSpace(distributorContent.DistributorType),
+		distributorContent.DistributorType,
 	)
 	if err != nil {
 		return model.ContentDistributor{}, err
 	}
 
-	insertDistributor.Close()
+	lastID, err := result.LastInsertId()
+	if err != nil {
+		return model.ContentDistributor{}, err
+	}
+
+	distributorContent.ID = int(lastID)
 	return distributorContent, nil
 }

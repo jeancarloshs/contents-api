@@ -3,7 +3,6 @@ package controllers
 import (
 	model "contents-api/internal/models"
 	"contents-api/internal/services/content_distributor_services"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -54,7 +53,7 @@ func (gcbic *ContentDistributorController) FindByID(ctx *gin.Context) {
 
 func (ccdc *ContentDistributorController) Create(ctx *gin.Context) {
 	var distributorContent model.ContentDistributor
-	fmt.Println(distributorContent)
+
 	err := ctx.BindJSON(&distributorContent)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Formato de dados inválido"})

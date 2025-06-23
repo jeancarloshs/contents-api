@@ -20,8 +20,8 @@ func (facdr *ContentDistributorRepository) FindAll() ([]model.ContentDistributor
 			&distributorObj.ID,
 			&distributorObj.Name,
 			&distributorObj.Description,
-			&distributorObj.DistributorType,
 			&distributorObj.Status,
+			&distributorObj.DistributorType,
 		)
 		if err != nil {
 			return []model.ContentDistributor{}, err
