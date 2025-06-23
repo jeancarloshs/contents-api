@@ -6,7 +6,7 @@ import (
 )
 
 func (favr *VodContentRepository) FindAll() ([]model.VodContent, error) {
-	query := "CALL SP_get_all_contents();"
+	query := "CALL SP_get_all_vod_contents();"
 
 	rows, err := favr.connection.Query(query)
 	if err != nil {

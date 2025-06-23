@@ -6,7 +6,7 @@ import (
 )
 
 func (fbidr *VodContentRepository) FindByID(vodID int) (model.VodContent, error) {
-	query := fmt.Sprintf("CALL SP_get_content_by_id(%d);", vodID)
+	query := fmt.Sprintf("CALL SP_get_vod_content_by_id(%d);", vodID)
 
 	rows, err := fbidr.connection.Query(query)
 	if err != nil {
