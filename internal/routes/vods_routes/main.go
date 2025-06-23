@@ -9,7 +9,7 @@ import (
 func SetupVodsRoutes(router *gin.RouterGroup, controller *controllers.VodContentController) {
 
 	// Rotas de conteúdos
-	router.GET("/contents", controller.FindAll)
-	router.GET("/content/:id", controller.FindByID)
-	router.POST("/content", controller.Create)
+	router.GET("/vods", controller.FindAll)
+	router.GET("/vod/:id", controller.FindByID)
+	router.POST("/vod", controller.Create)
 }
