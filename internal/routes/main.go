@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"contents-api/internal/app"
+	"contents-api/internal/controllers"
 	categoriesRoutes "contents-api/internal/routes/categories_routes"
 	distributorsRoutes "contents-api/internal/routes/distributors_routes"
 	imgsRoutes "contents-api/internal/routes/images_routes"
@@ -9,6 +11,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var vodContentController controllers.VodContentController
+var imageController controllers.ImageController
+var distributorController controllers.ContentDistributorController
+var categoryController controllers.CategoryController
+
+func LoadControllers(deps *app.DependencyContainer) {
+	vodContentController = deps.VodContentController
+	imageController = deps.ImageController
+	distributorController = deps.ContentDistributorController
+	categoryController = deps.CategoryController
+}
+
 func AppRoutes(router *gin.Engine) {
 	api := router.Group("/api")
 	{
@@ -16,12 +30,12 @@ func AppRoutes(router *gin.Engine) {
 			ctx.JSON(200, gin.H{"response": "Server is Running"})
 		})
 
-		vodsRoutes.SetupVodsRoutes(router)
+		vodsRoutes.SetupVodsRoutes(api, &vodContentController)
 
-		imgsRoutes.SetupImagesRoutes(router)
+		imgsRoutes.SetupImagesRoutes(api, &imageController)
 
-		distributorsRoutes.SetupDistributorsRoutes(router)
+		distributorsRoutes.SetupDistributorsRoutes(api, &distributorController)
 
-		categoriesRoutes.SetupCategoriesRoutes(router)
+		categoriesRoutes.SetupCategoriesRoutes(api, &categoryController)
 	}
 }

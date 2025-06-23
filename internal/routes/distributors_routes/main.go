@@ -6,8 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupDistributorsRoutes(router *gin.Engine) {
-	controller := &controllers.ContentDistributorController{}
+func SetupDistributorsRoutes(router *gin.RouterGroup, controller *controllers.ContentDistributorController) {
 
 	router.GET("/distributors", controller.FindAll)
 	router.GET("/distributor/:id", controller.FindByID)

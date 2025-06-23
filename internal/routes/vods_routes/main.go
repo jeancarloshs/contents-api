@@ -1,4 +1,4 @@
-package vod_routes
+package vods_routes
 
 import (
 	"contents-api/internal/controllers"
@@ -6,8 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupVodsRoutes(router *gin.Engine) {
-	controller := &controllers.VodContentController{}
+func SetupVodsRoutes(router *gin.RouterGroup, controller *controllers.VodContentController) {
 
 	// Rotas de conteúdos
 	router.GET("/contents", controller.FindAll)

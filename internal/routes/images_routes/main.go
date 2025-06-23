@@ -6,10 +6,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupImagesRoutes(router *gin.Engine) {
-	controller := &controllers.ImageController{}
+func SetupImagesRoutes(router *gin.RouterGroup, controller *controllers.ImageController) {
 
-	// Rotas de imagens
+	// Rotas de conteúdos
 	router.GET("/images", controller.FindAll)
 	router.GET("/image/:id", controller.FindByID)
 	router.POST("/upload", controller.InsertImage)
