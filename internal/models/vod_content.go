@@ -21,5 +21,5 @@ type VodContent struct {
 	Classification *string `json:"classificacao"`
 	Distribution   *string `json:"distribuidora"`
 	DistributionID *int    `json:"distribuidora_id"`
-	Status         *string `json:"status"`
+	Status         *Status `json:"status"`
 }
