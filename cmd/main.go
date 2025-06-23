@@ -13,11 +13,12 @@ func main() {
 	port := ":8000"
 	server := gin.Default()
 
-	dependencies, err := app.InitializeDependencies()
+	deps, err := app.InitializeDependencies()
 	if err != nil {
 		log.Fatalf("Erro ao inicializar dependências: %v", err)
 	}
-	routes.AppRoutes(server, dependencies.VodContentController, dependencies.ImageController, dependencies.ContentDistributorController, dependencies.CategoryController)
+	routes.LoadControllers(deps)
+	routes.AppRoutes(server)
 
 	log.Printf("Servidor rodando na http://%s%s\n", ip, port)
 

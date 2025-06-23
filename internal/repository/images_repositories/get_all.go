@@ -1,6 +1,8 @@
 package images_repositories
 
-import model "contents-api/internal/models"
+import (
+	model "contents-api/internal/models"
+)
 
 func (fair *ImageRepository) FindAll() ([]model.Images, error) {
 	query := `SELECT * FROM tb_imagens`
